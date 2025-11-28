@@ -332,6 +332,6 @@ This prototype was designed based on research from:
 
 ---
 
-**Built with ❤️ for UWC Students**
+**Built by Montell Boks for UWC Students**
 
 *Making higher education accessible to all.*
