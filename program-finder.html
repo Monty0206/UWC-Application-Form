@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Path at UWC | Program Finder</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="program-finder.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="uwc-logo.png" alt="University of the Western Cape Logo" class="uwc-logo">
+                <div class="header-text">
+                    <div class="university-name">
+                        <span class="name-line">UNIVERSITY <span class="of">of the</span> WESTERN CAPE</span>
+                        <span class="name-line-alt">IYUNIVESITHI <span class="of">yase</span>NTSHONA KOLONI</span>
+                        <span class="name-line-alt">UNIVERSITEIT <span class="of">van</span> WES-KAAPLAND</span>
+                    </div>
+                    <p class="tagline">Find Your Path - 2025</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn-help" onclick="window.location.href='index.html'">
+                    📋 Apply Now
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1>🎓 Find Your Perfect Path at UWC</h1>
+                <p class="hero-description">
+                    Not sure what to study? Tell us about your high school subjects and grades,
+                    and we'll recommend the best UWC programs for you, plus show you exciting
+                    career opportunities!
+                </p>
+            </section>
+
+            <!-- Subject Input Section -->
+            <section class="subjects-section" id="subjectsSection">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2>📚 Enter Your Grade 12 Subjects</h2>
+                        <p class="section-description">
+                            Add all your subjects and their current/final percentages.
+                            The more accurate, the better our recommendations!
+                        </p>
+                    </div>
+
+                    <div class="subjects-input">
+                        <!-- Subject Entry Form -->
+                        <div class="add-subject-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="subjectSelect">Subject <span class="required">*</span></label>
+                                    <select id="subjectSelect" class="subject-select">
+                                        <option value="">-- Select a subject --</option>
+                                        <optgroup label="Compulsory Subjects">
+                                            <option value="english">English Home Language</option>
+                                            <option value="english-fal">English First Additional Language</option>
+                                            <option value="afrikaans">Afrikaans Home Language</option>
+                                            <option value="afrikaans-fal">Afrikaans First Additional Language</option>
+                                            <option value="xhosa">isiXhosa Home Language</option>
+                                            <option value="xhosa-fal">isiXhosa First Additional Language</option>
+                                        </optgroup>
+                                        <optgroup label="Mathematics">
+                                            <option value="math">Mathematics</option>
+                                            <option value="math-lit">Mathematical Literacy</option>
+                                        </optgroup>
+                                        <optgroup label="Sciences">
+                                            <option value="physical-science">Physical Sciences</option>
+                                            <option value="life-science">Life Sciences</option>
+                                            <option value="agricultural-science">Agricultural Sciences</option>
+                                        </optgroup>
+                                        <optgroup label="Commerce">
+                                            <option value="accounting">Accounting</option>
+                                            <option value="business-studies">Business Studies</option>
+                                            <option value="economics">Economics</option>
+                                        </optgroup>
+                                        <optgroup label="Humanities">
+                                            <option value="history">History</option>
+                                            <option value="geography">Geography</option>
+                                            <option value="tourism">Tourism</option>
+                                        </optgroup>
+                                        <optgroup label="Other Subjects">
+                                            <option value="cat">Computer Applications Technology (CAT)</option>
+                                            <option value="it">Information Technology (IT)</option>
+                                            <option value="engineering">Engineering Graphics & Design</option>
+                                            <option value="visual-arts">Visual Arts</option>
+                                            <option value="dramatic-arts">Dramatic Arts</option>
+                                            <option value="music">Music</option>
+                                            <option value="consumer-studies">Consumer Studies</option>
+                                            <option value="hospitality">Hospitality Studies</option>
+                                            <option value="lo">Life Orientation</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="percentageInput">Percentage/Grade <span class="required">*</span></label>
+                                    <input type="number" id="percentageInput" min="0" max="100" placeholder="e.g., 75">
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="opacity: 0;">Action</label>
+                                    <button type="button" class="btn-add-subject" onclick="addSubject()">
+                                        ➕ Add Subject
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Added Subjects List -->
+                        <div class="added-subjects" id="addedSubjects">
+                            <h3>Your Subjects:</h3>
+                            <div class="subjects-list" id="subjectsList">
+                                <p class="empty-state">No subjects added yet. Add your first subject above!</p>
+                            </div>
+                        </div>
+
+                        <!-- Get Recommendations Button -->
+                        <div class="action-buttons">
+                            <button class="btn-primary btn-large" onclick="getRecommendations()" id="getRecommendationsBtn" disabled>
+                                🎯 Get My Recommendations
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsSection">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2>🎓 Your Recommended Programs</h2>
+                        <p class="section-description">
+                            Based on your subjects and grades, here are the UWC programs you qualify for:
+                        </p>
+                    </div>
+
+                    <div class="results-grid" id="resultsGrid">
+                        <!-- Results will be populated here by JavaScript -->
+                    </div>
+
+                    <div class="next-steps">
+                        <h3>🚀 Ready to Apply?</h3>
+                        <p>Found a program you like? Start your application now!</p>
+                        <button class="btn-success btn-large" onclick="window.location.href='index.html'">
+                            ✅ Start Application
+                        </button>
+                        <button class="btn-secondary" onclick="resetFinder()">
+                            🔄 Try Different Subjects
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <p>&copy; 2025 University of the Western Cape. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://www.uwc.ac.za" target="_blank">UWC Website</a>
+                <a href="https://www.uwc.ac.za/study/undergraduate" target="_blank">Programs</a>
+                <a href="index.html">Apply Now</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="program-finder.js"></script>
+</body>
+</html>
