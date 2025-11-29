@@ -34,10 +34,38 @@
     margin-bottom: 3rem;
     animation: slideInUp 0.6s ease;
     border: 2px solid var(--uwc-light-gold);
+    position: relative;
+    overflow: hidden;
 }
 
 .subjects-section {
     margin-bottom: 3rem;
+}
+
+.section-header {
+    border-bottom: 3px solid var(--uwc-gold);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 120px;
+    height: 3px;
+    background: var(--uwc-dark-blue);
+}
+
+.section-header h2 {
+    color: var(--uwc-dark-blue);
+    font-weight: 700;
+}
+
+.section-header .section-description {
+    color: var(--uwc-blue);
 }
 
 .add-subject-form {
@@ -51,10 +79,19 @@
     align-items: end;
 }
 
-.subject-select {
+.form-group label {
+    display: block;
+    font-weight: 700;
+    color: var(--uwc-dark-blue);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.subject-select,
+input[type="number"] {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid var(--gray);
+    border: 2px solid var(--uwc-gold);
     border-radius: var(--border-radius);
     font-family: inherit;
     font-size: 1rem;
@@ -63,27 +100,40 @@
     cursor: pointer;
 }
 
-.subject-select:focus {
-    border-color: var(--uwc-blue);
+.subject-select:focus,
+input[type="number"]:focus {
+    border-color: var(--uwc-dark-blue);
     outline: none;
-    box-shadow: 0 0 0 4px rgba(0, 59, 92, 0.15);
+    box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.25);
+    background-color: #FFFBF0;
+}
+
+.subject-select:hover,
+input[type="number"]:hover {
+    border-color: var(--uwc-blue);
+    background-color: #FFFBF0;
 }
 
 .btn-add-subject {
     background: linear-gradient(135deg, var(--uwc-gold), var(--uwc-light-gold));
-    color: var(--white);
-    border: none;
+    color: var(--uwc-dark-blue);
+    border: 2px solid var(--uwc-dark-blue);
     padding: 0.75rem 1.5rem;
     border-radius: var(--border-radius);
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
 }
 
 .btn-add-subject:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.4);
+    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.5);
+    background: linear-gradient(135deg, var(--uwc-light-gold), #F5D97E);
+    border-color: var(--uwc-blue);
 }
 
 .added-subjects {
@@ -108,14 +158,22 @@
 }
 
 .subject-item {
-    background: var(--white);
+    background: linear-gradient(135deg, #FFFFFF, #FFFBF0);
     padding: 1rem 1.5rem;
     border-radius: var(--border-radius);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(201, 162, 39, 0.15);
     animation: slideInRight 0.3s ease;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.subject-item:hover {
+    border-color: var(--uwc-gold);
+    box-shadow: 0 4px 16px rgba(201, 162, 39, 0.25);
+    transform: translateX(5px);
 }
 
 .subject-info {
@@ -143,24 +201,31 @@
 }
 
 .percentage-badge {
-    background: linear-gradient(135deg, var(--success), #2ECC71);
-    color: var(--white);
+    background: linear-gradient(135deg, var(--uwc-gold), var(--uwc-light-gold));
+    color: var(--uwc-dark-blue);
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
+    border: 2px solid var(--uwc-dark-blue);
 }
 
 .percentage-badge.high {
-    background: linear-gradient(135deg, var(--success), #2ECC71);
+    background: linear-gradient(135deg, var(--uwc-gold), var(--uwc-light-gold));
+    color: var(--uwc-dark-blue);
+    border-color: var(--uwc-dark-blue);
 }
 
 .percentage-badge.medium {
-    background: linear-gradient(135deg, var(--uwc-gold), var(--uwc-light-gold));
+    background: linear-gradient(135deg, #E5C255, #FFF8E1);
+    color: var(--uwc-blue);
+    border-color: var(--uwc-blue);
 }
 
 .percentage-badge.low {
-    background: linear-gradient(135deg, var(--warning), #F39C12);
+    background: linear-gradient(135deg, #FFE0B2, #FFCC80);
+    color: var(--uwc-blue);
+    border-color: var(--uwc-gold);
 }
 
 .btn-remove {
@@ -186,9 +251,12 @@
 
 .empty-state {
     text-align: center;
-    color: var(--text-secondary);
+    color: var(--uwc-blue);
     font-style: italic;
     padding: 2rem;
+    background: linear-gradient(135deg, #FFFBF0, #FFF8E1);
+    border-radius: var(--border-radius);
+    border: 2px dashed var(--uwc-gold);
 }
 
 .action-buttons {
@@ -197,8 +265,16 @@
 }
 
 .btn-large {
-    padding: 1rem 3rem;
+    padding: 1.25rem 3rem;
     font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 16px rgba(201, 162, 39, 0.3);
+}
+
+.btn-large:hover {
+    box-shadow: 0 6px 24px rgba(201, 162, 39, 0.5);
 }
 
 /* Results Section */
@@ -441,10 +517,50 @@
     margin: 0 0.5rem;
 }
 
+/* UWC Watermark Effect */
+.section-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background-image: url('uwc-logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.section-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* UWC Footer Branding */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--uwc-dark-blue), var(--uwc-gold), var(--uwc-light-gold), var(--uwc-gold), var(--uwc-dark-blue));
+    z-index: 1000;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .form-row {
         grid-template-columns: 1fr;
+    }
+
+    .hero-section {
+        padding: 3rem 1.5rem;
+        margin: -2rem -1.5rem 2rem -1.5rem;
     }
 
     .hero-section h1 {
@@ -463,5 +579,10 @@
         display: block;
         width: 100%;
         margin: 0.5rem 0;
+    }
+
+    .section-card::before {
+        width: 250px;
+        height: 250px;
     }
 }
