@@ -40,61 +40,8 @@ function initializeApp() {
     if (savedLowDataMode === 'true') {
         toggleLowDataMode();
     }
-
-    // Create floating particles
-    createFloatingParticles();
 }
 
-// Create Floating Decorative Particles
-function createFloatingParticles() {
-    // Don't create particles if low-data mode is active
-    if (appState.lowDataMode) return;
-
-    const particleContainer = document.createElement('div');
-    particleContainer.className = 'floating-particles';
-    particleContainer.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-        overflow: hidden;
-    `;
-
-    // Particle emojis/shapes
-    const particles = ['✨', '⭐', '💫', '🌟', '◆', '●', '■'];
-    const colors = ['#C9A227', '#003B5C', '#E5C255', '#00293D'];
-
-    // Create 15 floating particles
-    for (let i = 0; i < 15; i++) {
-        const particle = document.createElement('div');
-        const isEmoji = i < 8; // First 8 are emojis, rest are shapes
-
-        if (isEmoji) {
-            particle.textContent = particles[Math.floor(Math.random() * particles.length)];
-            particle.style.fontSize = `${Math.random() * 1.5 + 1}rem`;
-        } else {
-            particle.textContent = particles[Math.floor(Math.random() * 3) + 4]; // shapes
-            particle.style.fontSize = `${Math.random() * 2 + 1}rem`;
-            particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        particle.style.cssText += `
-            position: absolute;
-            opacity: ${Math.random() * 0.3 + 0.1};
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation: float${i % 3} ${Math.random() * 10 + 15}s ease-in-out infinite;
-            animation-delay: ${Math.random() * -20}s;
-        `;
-
-        particleContainer.appendChild(particle);
-    }
-
-    document.body.insertBefore(particleContainer, document.body.firstChild);
-}
 
 // Setup Event Listeners
 function setupEventListeners() {
@@ -448,12 +395,29 @@ function populateReviewSection() {
 
     // Personal Information
     html += `
-        <div class="review-item">
-            <h3>📋 Personal Information</h3>
-            <p><strong>Full Name:</strong> ${formData.firstName || ''} ${formData.surname || ''}</p>
-            <p><strong>Email:</strong> ${formData.email || ''} ${appState.emailVerified ? '✓' : '✗'}</p>
-            <p><strong>Phone:</strong> ${formData.phone || ''} ${appState.phoneVerified ? '✓' : '✗'}</p>
-            <p><strong>ID Number:</strong> ${formData.idNumber || ''}</p>
+        <div class="review-card">
+            <div class="review-card-header">
+                <i data-lucide="user"></i>
+                <h3>Personal Information</h3>
+            </div>
+            <div class="review-card-body">
+                <div class="review-row">
+                    <span class="review-label">Full Name:</span>
+                    <span class="review-value">${formData.firstName || ''} ${formData.surname || ''}</span>
+                </div>
+                <div class="review-row">
+                    <span class="review-label">Email:</span>
+                    <span class="review-value">${formData.email || ''} ${appState.emailVerified ? '<span class="verified-badge-inline"><i data-lucide="check-circle"></i> Verified</span>' : ''}</span>
+                </div>
+                <div class="review-row">
+                    <span class="review-label">Phone:</span>
+                    <span class="review-value">${formData.phone || ''} ${appState.phoneVerified ? '<span class="verified-badge-inline"><i data-lucide="check-circle"></i> Verified</span>' : ''}</span>
+                </div>
+                <div class="review-row">
+                    <span class="review-label">ID Number:</span>
+                    <span class="review-value">${formData.idNumber || ''}</span>
+                </div>
+            </div>
         </div>
     `;
 
@@ -463,38 +427,82 @@ function populateReviewSection() {
     const program3 = document.getElementById('program3');
 
     html += `
-        <div class="review-item">
-            <h3>🎓 Academic Information</h3>
-            <p><strong>Applicant Type:</strong> ${document.getElementById('studentType')?.selectedOptions[0]?.text || 'Not selected'}</p>
-            <p><strong>First Choice:</strong> ${program1?.selectedOptions[0]?.text || 'Not selected'}</p>
-            ${program2?.value ? `<p><strong>Second Choice:</strong> ${program2.selectedOptions[0].text}</p>` : ''}
-            ${program3?.value ? `<p><strong>Third Choice:</strong> ${program3.selectedOptions[0].text}</p>` : ''}
+        <div class="review-card">
+            <div class="review-card-header">
+                <i data-lucide="graduation-cap"></i>
+                <h3>Academic Information</h3>
+            </div>
+            <div class="review-card-body">
+                <div class="review-row">
+                    <span class="review-label">Applicant Type:</span>
+                    <span class="review-value">${document.getElementById('studentType')?.selectedOptions[0]?.text || 'Not selected'}</span>
+                </div>
+                <div class="review-row">
+                    <span class="review-label">First Choice:</span>
+                    <span class="review-value">${program1?.selectedOptions[0]?.text || 'Not selected'}</span>
+                </div>
+                ${program2?.value ? `
+                <div class="review-row">
+                    <span class="review-label">Second Choice:</span>
+                    <span class="review-value">${program2.selectedOptions[0].text}</span>
+                </div>` : ''}
+                ${program3?.value ? `
+                <div class="review-row">
+                    <span class="review-label">Third Choice:</span>
+                    <span class="review-value">${program3.selectedOptions[0].text}</span>
+                </div>` : ''}
+            </div>
         </div>
     `;
 
     // Residence
     const needResidence = document.querySelector('input[name="needResidence"]:checked')?.value;
     html += `
-        <div class="review-item">
-            <h3>🏠 Residence</h3>
-            <p><strong>Residence Required:</strong> ${needResidence === 'yes' ? 'Yes' : 'No'}</p>
-            ${needResidence === 'yes' ? `<p><strong>Reason:</strong> ${formData.residenceReason || 'Not provided'}</p>` : ''}
+        <div class="review-card">
+            <div class="review-card-header">
+                <i data-lucide="home"></i>
+                <h3>Residence</h3>
+            </div>
+            <div class="review-card-body">
+                <div class="review-row">
+                    <span class="review-label">Residence Required:</span>
+                    <span class="review-value">${needResidence === 'yes' ? 'Yes' : 'No'}</span>
+                </div>
+                ${needResidence === 'yes' && formData.residenceReason ? `
+                <div class="review-row">
+                    <span class="review-label">Reason:</span>
+                    <span class="review-value">${formData.residenceReason}</span>
+                </div>` : ''}
+            </div>
         </div>
     `;
 
     // Financial Aid
     const needFinancialAid = document.querySelector('input[name="needFinancialAid"]:checked')?.value;
     html += `
-        <div class="review-item">
-            <h3>💰 Financial Aid</h3>
-            <p><strong>Financial Aid Required:</strong> ${needFinancialAid === 'yes' ? 'Yes' : 'No'}</p>
-            ${needFinancialAid === 'yes' && formData.nsfas ? '<p>✓ NSFAS application requested</p>' : ''}
-            ${needFinancialAid === 'yes' && formData.bursaries ? '<p>✓ UWC Bursaries requested</p>' : ''}
-            ${needFinancialAid === 'yes' && formData.scholarships ? '<p>✓ Academic Scholarships requested</p>' : ''}
+        <div class="review-card">
+            <div class="review-card-header">
+                <i data-lucide="dollar-sign"></i>
+                <h3>Financial Aid</h3>
+            </div>
+            <div class="review-card-body">
+                <div class="review-row">
+                    <span class="review-label">Financial Aid Required:</span>
+                    <span class="review-value">${needFinancialAid === 'yes' ? 'Yes' : 'No'}</span>
+                </div>
+                ${needFinancialAid === 'yes' && formData.nsfas ? '<div class="review-row"><span class="review-label"></span><span class="review-value"><i data-lucide="check"></i> NSFAS application requested</span></div>' : ''}
+                ${needFinancialAid === 'yes' && formData.bursaries ? '<div class="review-row"><span class="review-label"></span><span class="review-value"><i data-lucide="check"></i> UWC Bursaries requested</span></div>' : ''}
+                ${needFinancialAid === 'yes' && formData.scholarships ? '<div class="review-row"><span class="review-label"></span><span class="review-value"><i data-lucide="check"></i> Academic Scholarships requested</span></div>' : ''}
+            </div>
         </div>
     `;
 
     reviewContent.innerHTML = html;
+
+    // Re-initialize Lucide icons for dynamically added content
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 }
 
 // Form Data Management

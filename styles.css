@@ -1076,38 +1076,97 @@ textarea {
 }
 
 /* Review Section */
+/* Review Section - Professional Cards */
 .review-section {
-    background-color: var(--light-gray);
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    margin-bottom: 2rem;
+    margin-bottom: 32px;
 }
 
-.review-item {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--gray);
+.review-card {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 1px solid #e8e8e8;
+    transition: all 0.2s ease;
 }
 
-.review-item:last-child {
+.review-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border-color: var(--uwc-blue);
+}
+
+.review-card-header {
+    background: linear-gradient(135deg, var(--uwc-blue) 0%, var(--uwc-dark-blue) 100%);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.review-card-header i[data-lucide] {
+    width: 24px;
+    height: 24px;
+    color: var(--uwc-gold);
+}
+
+.review-card-header h3 {
+    color: var(--white);
+    font-size: 1.25rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.review-card-body {
+    padding: 24px;
+}
+
+.review-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--light-gray);
+    align-items: start;
+}
+
+.review-row:last-child {
     border-bottom: none;
 }
 
-.review-item h3 {
-    color: var(--uwc-blue);
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+.review-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
 }
 
-.review-item p {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.review-item strong {
+.review-value {
     color: var(--text-primary);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.review-value i[data-lucide] {
+    width: 16px;
+    height: 16px;
+    color: var(--success);
+}
+
+.verified-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--success);
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-left: 8px;
+}
+
+.verified-badge-inline i[data-lucide] {
+    width: 16px;
+    height: 16px;
 }
 
 /* Declaration */
@@ -1581,6 +1640,15 @@ textarea {
     .footer-links {
         flex-direction: column;
         gap: 0.5rem;
+    }
+
+    .review-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .review-label {
+        font-weight: 700;
     }
 }
 
