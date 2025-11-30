@@ -3,19 +3,17 @@
 .hero-section {
     text-align: center;
     padding: 3rem 0;
-    animation: fadeInDown 0.6s ease;
-    background: linear-gradient(135deg, var(--uwc-dark-blue) 0%, var(--uwc-blue) 100%);
+    background: linear-gradient(135deg, var(--uwc-blue) 0%, var(--uwc-dark-blue) 100%);
     margin: -2rem -2rem 3rem -2rem;
     padding: 4rem 2rem;
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 12px 12px;
 }
 
 .hero-section h1 {
     font-size: 2.5rem;
-    color: var(--uwc-light-gold);
+    color: var(--white);
     margin-bottom: 1rem;
     line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-description {
@@ -29,11 +27,9 @@
 .section-card {
     background: var(--white);
     border-radius: 12px;
-    padding: 3rem;
-    box-shadow: 0 4px 20px rgba(201, 162, 39, 0.15);
-    margin-bottom: 3rem;
-    animation: slideInUp 0.6s ease;
-    border: 2px solid var(--uwc-light-gold);
+    padding: 28px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    margin-bottom: 32px;
     position: relative;
     overflow: hidden;
 }
@@ -43,29 +39,22 @@
 }
 
 .section-header {
-    border-bottom: 3px solid var(--uwc-gold);
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--uwc-gold);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
     position: relative;
 }
 
-.section-header::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 120px;
-    height: 3px;
-    background: var(--uwc-dark-blue);
-}
-
 .section-header h2 {
-    color: var(--uwc-dark-blue);
+    color: var(--uwc-blue);
     font-weight: 700;
+    display: flex;
+    align-items: center;
 }
 
 .section-header .section-description {
-    color: var(--uwc-blue);
+    color: var(--text-secondary);
+    margin-top: 8px;
 }
 
 .add-subject-form {
@@ -90,59 +79,52 @@
 .subject-select,
 input[type="number"] {
     width: 100%;
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--uwc-gold);
-    border-radius: var(--border-radius);
+    padding: 14px 16px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
     font-family: inherit;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background-color: var(--white);
+    font-size: 15px;
+    background: #fafafa;
+    transition: all 0.2s ease;
     cursor: pointer;
 }
 
 .subject-select:focus,
 input[type="number"]:focus {
-    border-color: var(--uwc-dark-blue);
+    border-color: var(--uwc-blue);
     outline: none;
-    box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.25);
-    background-color: #FFFBF0;
+    box-shadow: 0 0 0 3px rgba(0, 47, 101, 0.1);
+    background-color: #ffffff;
 }
 
 .subject-select:hover,
 input[type="number"]:hover {
     border-color: var(--uwc-blue);
-    background-color: #FFFBF0;
 }
 
 .btn-add-subject {
-    background: linear-gradient(135deg, var(--uwc-gold), var(--uwc-light-gold));
-    color: var(--uwc-dark-blue);
-    border: 2px solid var(--uwc-dark-blue);
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--border-radius);
-    font-weight: 700;
+    background: var(--uwc-blue);
+    color: var(--white);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     white-space: nowrap;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 0.875rem;
+    font-size: 15px;
 }
 
 .btn-add-subject:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.5);
-    background: linear-gradient(135deg, var(--uwc-light-gold), #F5D97E);
-    border-color: var(--uwc-blue);
+    background: var(--uwc-dark-blue);
 }
 
 .added-subjects {
-    margin-top: 2rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
-    border-radius: var(--border-radius);
-    border: 2px solid var(--uwc-gold);
-    box-shadow: 0 2px 12px rgba(201, 162, 39, 0.2);
+    margin-top: 24px;
+    padding: 24px;
+    background: var(--light-gray);
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
 }
 
 .added-subjects h3 {
@@ -158,22 +140,20 @@ input[type="number"]:hover {
 }
 
 .subject-item {
-    background: linear-gradient(135deg, #FFFFFF, #FFFBF0);
-    padding: 1rem 1.5rem;
-    border-radius: var(--border-radius);
+    background: var(--white);
+    padding: 16px;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(201, 162, 39, 0.15);
-    animation: slideInRight 0.3s ease;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e8e8e8;
+    transition: all 0.2s ease;
 }
 
 .subject-item:hover {
-    border-color: var(--uwc-gold);
-    box-shadow: 0 4px 16px rgba(201, 162, 39, 0.25);
-    transform: translateX(5px);
+    border-color: var(--uwc-blue);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
 .subject-info {
@@ -290,22 +270,20 @@ input[type="number"]:hover {
 }
 
 .program-card {
-    background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF0 100%);
-    border: 3px solid var(--uwc-gold);
+    background: var(--white);
+    border: 1px solid #dcdcdc;
     border-radius: 12px;
-    padding: 2rem;
-    transition: all 0.3s ease;
+    padding: 24px;
+    transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
-    animation: fadeIn 0.5s ease;
-    box-shadow: 0 4px 16px rgba(201, 162, 39, 0.2);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
 }
 
 .program-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 32px rgba(201, 162, 39, 0.35);
-    border-color: var(--uwc-light-gold);
-    background: linear-gradient(135deg, #FFFFFF 0%, #FFF8E1 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-color: var(--uwc-blue);
 }
 
 .program-card::before {
@@ -314,8 +292,8 @@ input[type="number"]:hover {
     top: 0;
     left: 0;
     width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg, var(--uwc-dark-blue), var(--uwc-gold), var(--uwc-light-gold));
+    height: 4px;
+    background: linear-gradient(90deg, var(--uwc-blue), var(--uwc-gold));
 }
 
 .match-score {
@@ -492,19 +470,17 @@ input[type="number"]:hover {
 
 .next-steps {
     text-align: center;
-    padding: 3rem 2rem;
-    background: linear-gradient(135deg, var(--uwc-dark-blue), var(--uwc-blue));
+    padding: 48px 24px;
+    background: linear-gradient(135deg, var(--uwc-blue), var(--uwc-dark-blue));
     border-radius: 12px;
-    margin-top: 3rem;
-    border: 3px solid var(--uwc-gold);
-    box-shadow: 0 8px 24px rgba(201, 162, 39, 0.3);
+    margin-top: 48px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
 }
 
 .next-steps h3 {
-    color: var(--uwc-light-gold);
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    font-size: 1.75rem;
+    margin-bottom: 16px;
 }
 
 .next-steps p {
@@ -517,40 +493,6 @@ input[type="number"]:hover {
     margin: 0 0.5rem;
 }
 
-/* UWC Watermark Effect */
-.section-card::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
-    background-image: url('uwc-logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.02;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.section-card > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* UWC Footer Branding */
-body::after {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--uwc-dark-blue), var(--uwc-gold), var(--uwc-light-gold), var(--uwc-gold), var(--uwc-dark-blue));
-    z-index: 1000;
-}
 
 /* Responsive */
 @media (max-width: 768px) {

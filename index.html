@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <!-- Header with UWC Branding -->
@@ -27,10 +28,10 @@
             </div>
             <div class="header-actions">
                 <button class="btn-save" id="saveProgress" aria-label="Save your progress">
-                    <span class="icon">💾</span> Save Progress
+                    <i data-lucide="save"></i> Save Progress
                 </button>
                 <button class="btn-help" id="helpBtn" aria-label="Get help">
-                    <span class="icon">?</span> Help
+                    <i data-lucide="help-circle"></i> Help
                 </button>
             </div>
         </div>
@@ -74,7 +75,7 @@
             <!-- Not Sure What to Study Banner -->
             <div class="accessibility-banner" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-left-color: var(--uwc-gold); margin-bottom: 1.5rem;">
                 <div class="banner-content">
-                    <span class="icon">🎯</span>
+                    <i data-lucide="compass" style="flex-shrink: 0;"></i>
                     <div>
                         <strong>Not sure what to study?</strong>
                         <button class="link-btn" onclick="window.location.href='program-finder.html'">Find Your Perfect Program →</button>
@@ -85,7 +86,7 @@
             <!-- Accessibility Banner -->
             <div class="accessibility-banner">
                 <div class="banner-content">
-                    <span class="icon">📱</span>
+                    <i data-lucide="smartphone" style="flex-shrink: 0;"></i>
                     <div>
                         <strong>Low Data Mode Available:</strong>
                         <button class="link-btn" id="lowDataToggle">Switch to low-data version</button>
@@ -108,7 +109,9 @@
                         <div class="form-group">
                             <label for="surname">
                                 Surname <span class="required">*</span>
-                                <button type="button" class="info-btn" aria-label="More information about surname" data-tooltip="Enter your surname as it appears on your ID document">ℹ️</button>
+                                <button type="button" class="info-btn" aria-label="More information about surname" data-tooltip="Enter your surname as it appears on your ID document">
+                                    <i data-lucide="info"></i>
+                                </button>
                             </label>
                             <input type="text" id="surname" name="surname" required aria-required="true" autocomplete="family-name">
                             <span class="error-message" id="surname-error"></span>
@@ -125,7 +128,9 @@
                         <div class="form-group full-width">
                             <label for="email">
                                 Email Address <span class="required">*</span>
-                                <button type="button" class="info-btn" data-tooltip="We'll send important updates to this email. Make sure you check it regularly.">ℹ️</button>
+                                <button type="button" class="info-btn" data-tooltip="We'll send important updates to this email. Make sure you check it regularly.">
+                                    <i data-lucide="info"></i>
+                                </button>
                             </label>
                             <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
                             <button type="button" class="verify-btn" id="verifyEmail">Verify Email</button>
@@ -142,7 +147,9 @@
                         <div class="form-group full-width">
                             <label for="phone">
                                 Mobile Number <span class="required">*</span>
-                                <button type="button" class="info-btn" data-tooltip="We'll send SMS updates about your application. Standard rates apply.">ℹ️</button>
+                                <button type="button" class="info-btn" data-tooltip="We'll send SMS updates about your application. Standard rates apply.">
+                                    <i data-lucide="info"></i>
+                                </button>
                             </label>
                             <input type="tel" id="phone" name="phone" required aria-required="true" autocomplete="tel" placeholder="+27">
                             <button type="button" class="verify-btn" id="verifyPhone">Verify Phone</button>
@@ -187,15 +194,15 @@
                         <div class="checkbox-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" name="smsUpdates" checked>
-                                <span>📱 Receive SMS updates (Recommended for low-data users)</span>
+                                <span>Receive SMS updates (Recommended for low-data users)</span>
                             </label>
                             <label class="checkbox-label">
                                 <input type="checkbox" name="whatsappUpdates">
-                                <span>💬 Receive WhatsApp updates</span>
+                                <span>Receive WhatsApp updates</span>
                             </label>
                             <label class="checkbox-label">
                                 <input type="checkbox" name="emailUpdates" checked>
-                                <span>📧 Receive Email updates</span>
+                                <span>Receive Email updates</span>
                             </label>
                         </div>
                     </div>
@@ -225,7 +232,9 @@
                         <div class="form-group full-width">
                             <label for="program1">
                                 First Choice Program <span class="required">*</span>
-                                <button type="button" class="info-btn" data-tooltip="Choose your preferred program. You can select up to 3 choices.">ℹ️</button>
+                                <button type="button" class="info-btn" data-tooltip="Choose your preferred program. You can select up to 3 choices.">
+                                    <i data-lucide="info"></i>
+                                </button>
                             </label>
                             <select id="program1" name="program1" required>
                                 <option value="">Select a program</option>
@@ -291,7 +300,9 @@
                         <div class="form-group full-width">
                             <label>
                                 Do you need residence placement? <span class="required">*</span>
-                                <button type="button" class="info-btn" data-tooltip="UWC offers various residence options. Learn more at www.uwc.ac.za/residences">ℹ️</button>
+                                <button type="button" class="info-btn" data-tooltip="UWC offers various residence options. Learn more at www.uwc.ac.za/residences">
+                                    <i data-lucide="info"></i>
+                                </button>
                             </label>
                             <div class="radio-group">
                                 <label class="radio-label">
@@ -346,7 +357,9 @@
                         <div class="form-group full-width">
                             <label>
                                 Do you need financial aid? <span class="required">*</span>
-                                <button type="button" class="info-btn" data-tooltip="UWC offers various funding options including NSFAS, bursaries, and scholarships. Learn more at www.uwc.ac.za/financialaid">ℹ️</button>
+                                <button type="button" class="info-btn" data-tooltip="UWC offers various funding options including NSFAS, bursaries, and scholarships. Learn more at www.uwc.ac.za/financialaid">
+                                    <i data-lucide="info"></i>
+                                </button>
                             </label>
                             <div class="radio-group">
                                 <label class="radio-label">
@@ -468,17 +481,17 @@
             <h2>Need Help?</h2>
             <div class="help-options">
                 <div class="help-card">
-                    <h3>📞 Phone Support</h3>
+                    <h3><i data-lucide="phone"></i> Phone Support</h3>
                     <p>Call us: +27 21 959 2911</p>
                     <p class="small">Mon-Fri: 8:00 AM - 4:30 PM</p>
                 </div>
                 <div class="help-card">
-                    <h3>📧 Email Support</h3>
+                    <h3><i data-lucide="mail"></i> Email Support</h3>
                     <p>admissions@uwc.ac.za</p>
                     <p class="small">Response within 24-48 hours</p>
                 </div>
                 <div class="help-card">
-                    <h3>💬 Live Chat</h3>
+                    <h3><i data-lucide="message-circle"></i> Live Chat</h3>
                     <button class="btn-primary">Start Chat</button>
                     <p class="small">Available during business hours</p>
                 </div>
@@ -487,5 +500,9 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>

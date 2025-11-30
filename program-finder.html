@@ -6,7 +6,8 @@
     <title>Find Your Path at UWC | Program Finder</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="program-finder.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <!-- Header -->
@@ -25,7 +26,7 @@
             </div>
             <div class="header-actions">
                 <button class="btn-help" onclick="window.location.href='index.html'">
-                    📋 Apply Now
+                    <i data-lucide="clipboard"></i> Apply Now
                 </button>
             </div>
         </div>
@@ -36,7 +37,7 @@
         <div class="container">
             <!-- Hero Section -->
             <section class="hero-section">
-                <h1>🎓 Find Your Perfect Path at UWC</h1>
+                <h1>Find Your Perfect Path at UWC</h1>
                 <p class="hero-description">
                     Not sure what to study? Tell us about your high school subjects and grades,
                     and we'll recommend the best UWC programs for you, plus show you exciting
@@ -48,7 +49,7 @@
             <section class="subjects-section" id="subjectsSection">
                 <div class="section-card">
                     <div class="section-header">
-                        <h2>📚 Enter Your Grade 12 Subjects</h2>
+                        <h2><i data-lucide="book-open"></i> Enter Your Grade 12 Subjects</h2>
                         <p class="section-description">
                             Add all your subjects and their current/final percentages.
                             The more accurate, the better our recommendations!
@@ -112,7 +113,7 @@
                                 <div class="form-group">
                                     <label style="opacity: 0;">Action</label>
                                     <button type="button" class="btn-add-subject" onclick="addSubject()">
-                                        ➕ Add Subject
+                                        <i data-lucide="plus"></i> Add Subject
                                     </button>
                                 </div>
                             </div>
@@ -129,7 +130,7 @@
                         <!-- Get Recommendations Button -->
                         <div class="action-buttons">
                             <button class="btn-primary btn-large" onclick="getRecommendations()" id="getRecommendationsBtn" disabled>
-                                🎯 Get My Recommendations
+                                <i data-lucide="target"></i> Get My Recommendations
                             </button>
                         </div>
                     </div>
@@ -140,7 +141,7 @@
             <section class="results-section hidden" id="resultsSection">
                 <div class="section-card">
                     <div class="section-header">
-                        <h2>🎓 Your Recommended Programs</h2>
+                        <h2><i data-lucide="graduation-cap"></i> Your Recommended Programs</h2>
                         <p class="section-description">
                             Based on your subjects and grades, here are the UWC programs you qualify for:
                         </p>
@@ -151,13 +152,13 @@
                     </div>
 
                     <div class="next-steps">
-                        <h3>🚀 Ready to Apply?</h3>
+                        <h3>Ready to Apply?</h3>
                         <p>Found a program you like? Start your application now!</p>
                         <button class="btn-success btn-large" onclick="window.location.href='index.html'">
-                            ✅ Start Application
+                            <i data-lucide="check-circle"></i> Start Application
                         </button>
                         <button class="btn-secondary" onclick="resetFinder()">
-                            🔄 Try Different Subjects
+                            <i data-lucide="refresh-cw"></i> Try Different Subjects
                         </button>
                     </div>
                 </div>
@@ -178,5 +179,9 @@
     </footer>
 
     <script src="program-finder.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
