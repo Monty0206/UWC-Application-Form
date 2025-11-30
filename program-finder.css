@@ -89,17 +89,19 @@ input[type="number"] {
     cursor: pointer;
 }
 
+.subject-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23002F65' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 3rem;
+}
+
 .subject-select:focus,
 input[type="number"]:focus {
     border-color: var(--uwc-blue);
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 47, 101, 0.1);
     background-color: #ffffff;
-}
-
-.subject-select:hover,
-input[type="number"]:hover {
-    border-color: var(--uwc-blue);
 }
 
 .btn-add-subject {
