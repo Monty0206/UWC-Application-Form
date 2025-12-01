@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSavedProgress();
     setupEventListeners();
     updateProgress();
+    initializeScrollHeader();
 });
 
 // Initialize Application
@@ -1166,6 +1167,52 @@ function removeReference(index) {
         cards[index].remove();
         appState.references.splice(index, 1);
         showNotification('Reference removed', 'info');
+    }
+}
+
+// ========================================
+// Header Scroll Hide/Show
+// ========================================
+
+function initializeScrollHeader() {
+    let lastScrollTop = 0;
+    let scrollThreshold = 100; // Start hiding after scrolling 100px
+    const header = document.querySelector('.app-header');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                handleHeaderScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    function handleHeaderScroll() {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Don't do anything if we're at the very top
+        if (currentScroll <= scrollThreshold) {
+            header.classList.remove('header-hidden');
+            header.classList.add('header-visible');
+            lastScrollTop = currentScroll;
+            return;
+        }
+
+        // Scrolling down - hide header
+        if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
+            header.classList.add('header-hidden');
+            header.classList.remove('header-visible');
+        }
+        // Scrolling up - show header
+        else if (currentScroll < lastScrollTop) {
+            header.classList.remove('header-hidden');
+            header.classList.add('header-visible');
+        }
+
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     }
 }
 
