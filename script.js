@@ -1176,8 +1176,15 @@ function removeReference(index) {
 
 function initializeScrollHeader() {
     let lastScrollTop = 0;
-    let scrollThreshold = 100; // Start hiding after scrolling 100px
+    let scrollThreshold = 50; // Start hiding after scrolling 50px
     const header = document.querySelector('.app-header');
+
+    if (!header) {
+        console.error('Header not found!');
+        return;
+    }
+
+    console.log('Header scroll initialized');
     let ticking = false;
 
     window.addEventListener('scroll', () => {
@@ -1203,11 +1210,13 @@ function initializeScrollHeader() {
 
         // Scrolling down - hide header
         if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
+            console.log('Hiding header');
             header.classList.add('header-hidden');
             header.classList.remove('header-visible');
         }
         // Scrolling up - show header
         else if (currentScroll < lastScrollTop) {
+            console.log('Showing header');
             header.classList.remove('header-hidden');
             header.classList.add('header-visible');
         }
