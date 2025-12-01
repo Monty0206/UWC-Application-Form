@@ -47,7 +47,7 @@
         <div class="step-indicators">
             <div class="step active" data-step="1">
                 <div class="step-number">1</div>
-                <div class="step-label">Personal Info</div>
+                <div class="step-label">Personal</div>
             </div>
             <div class="step" data-step="2">
                 <div class="step-number">2</div>
@@ -55,14 +55,34 @@
             </div>
             <div class="step" data-step="3">
                 <div class="step-number">3</div>
-                <div class="step-label">Residence</div>
+                <div class="step-label">Documents</div>
             </div>
             <div class="step" data-step="4">
                 <div class="step-number">4</div>
-                <div class="step-label">Financial Aid</div>
+                <div class="step-label">Statement</div>
             </div>
             <div class="step" data-step="5">
                 <div class="step-number">5</div>
+                <div class="step-label">Activities</div>
+            </div>
+            <div class="step" data-step="6">
+                <div class="step-number">6</div>
+                <div class="step-label">Experience</div>
+            </div>
+            <div class="step" data-step="7">
+                <div class="step-number">7</div>
+                <div class="step-label">References</div>
+            </div>
+            <div class="step" data-step="8">
+                <div class="step-number">8</div>
+                <div class="step-label">Residence</div>
+            </div>
+            <div class="step" data-step="9">
+                <div class="step-number">9</div>
+                <div class="step-label">Financial</div>
+            </div>
+            <div class="step" data-step="10">
+                <div class="step-number">10</div>
                 <div class="step-label">Review</div>
             </div>
         </div>
@@ -72,14 +92,22 @@
     <main class="app-main">
         <div class="container">
 
-            <!-- Not Sure What to Study Banner -->
-            <div class="accessibility-banner" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%); border-left-color: var(--uwc-gold); margin-bottom: 1.5rem;">
-                <div class="banner-content">
-                    <i data-lucide="compass" style="flex-shrink: 0;"></i>
-                    <div>
-                        <strong>Not sure what to study?</strong>
-                        <button class="link-btn" onclick="window.location.href='program-finder.html'">Find Your Perfect Program →</button>
-                    </div>
+            <!-- Quick Tools Banner -->
+            <div class="quick-tools-grid">
+                <div class="tool-card" onclick="window.location.href='program-finder.html'">
+                    <i data-lucide="compass"></i>
+                    <h3>Program Finder</h3>
+                    <p>Not sure what to study?</p>
+                </div>
+                <div class="tool-card" onclick="window.location.href='aps-calculator.html'">
+                    <i data-lucide="calculator"></i>
+                    <h3>APS Calculator</h3>
+                    <p>Calculate your score</p>
+                </div>
+                <div class="tool-card" onclick="window.location.href='application-status.html'">
+                    <i data-lucide="clipboard-check"></i>
+                    <h3>Track Status</h3>
+                    <p>Monitor your application</p>
                 </div>
             </div>
 
@@ -103,6 +131,32 @@
                     <div class="section-header">
                         <h2>Personal Information</h2>
                         <p class="section-description">Please provide your personal details. All fields marked with <span class="required">*</span> are required.</p>
+                    </div>
+
+                    <!-- Profile Picture Upload -->
+                    <div class="profile-picture-section">
+                        <label class="profile-pic-label">
+                            Profile Picture <span class="required">*</span>
+                            <button type="button" class="info-btn" data-tooltip="Upload a recent passport-style photo. Max 2MB, JPG or PNG format.">
+                                <i data-lucide="info"></i>
+                            </button>
+                        </label>
+                        <div class="profile-pic-upload">
+                            <div class="profile-pic-preview" id="profilePicPreview">
+                                <i data-lucide="user" class="placeholder-icon"></i>
+                                <img id="profilePicImage" class="hidden" alt="Profile picture preview">
+                            </div>
+                            <div class="profile-pic-controls">
+                                <input type="file" id="profilePic" name="profilePic" accept="image/jpeg,image/png,image/jpg" hidden>
+                                <button type="button" class="btn-secondary" id="uploadProfilePic">
+                                    <i data-lucide="camera"></i> Upload Photo
+                                </button>
+                                <button type="button" class="btn-secondary hidden" id="removeProfilePic">
+                                    <i data-lucide="x"></i> Remove
+                                </button>
+                                <p class="small">JPG or PNG, max 2MB</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-grid">
@@ -289,8 +343,304 @@
                     </div>
                 </section>
 
-                <!-- Section 3: Residence Application -->
+                <!-- Section 3: Document Upload -->
                 <section class="form-section" id="section3">
+                    <div class="section-header">
+                        <h2>Upload Documents</h2>
+                        <p class="section-description">Please upload the required documents. All documents must be clear and legible.</p>
+                    </div>
+
+                    <div class="documents-grid">
+                        <!-- ID Document -->
+                        <div class="document-upload-card">
+                            <div class="doc-header">
+                                <i data-lucide="file-text"></i>
+                                <h4>ID Document / Passport <span class="required">*</span></h4>
+                            </div>
+                            <div class="upload-zone" id="idDocUploadZone">
+                                <i data-lucide="upload-cloud"></i>
+                                <p>Drag & drop or click to upload</p>
+                                <p class="small">PDF, JPG, PNG - Max 5MB</p>
+                                <input type="file" id="idDoc" name="idDoc" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                            </div>
+                            <div class="uploaded-file hidden" id="idDocUploaded">
+                                <i data-lucide="file-check"></i>
+                                <span class="file-name"></span>
+                                <button type="button" class="btn-remove" data-doc="idDoc"><i data-lucide="x"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Matric Certificate -->
+                        <div class="document-upload-card">
+                            <div class="doc-header">
+                                <i data-lucide="file-text"></i>
+                                <h4>Matric Certificate / Latest Results <span class="required">*</span></h4>
+                            </div>
+                            <div class="upload-zone" id="matricUploadZone">
+                                <i data-lucide="upload-cloud"></i>
+                                <p>Drag & drop or click to upload</p>
+                                <p class="small">PDF, JPG, PNG - Max 5MB</p>
+                                <input type="file" id="matricDoc" name="matricDoc" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                            </div>
+                            <div class="uploaded-file hidden" id="matricDocUploaded">
+                                <i data-lucide="file-check"></i>
+                                <span class="file-name"></span>
+                                <button type="button" class="btn-remove" data-doc="matricDoc"><i data-lucide="x"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Proof of Residence -->
+                        <div class="document-upload-card">
+                            <div class="doc-header">
+                                <i data-lucide="home"></i>
+                                <h4>Proof of Residence</h4>
+                            </div>
+                            <div class="upload-zone" id="proofResUploadZone">
+                                <i data-lucide="upload-cloud"></i>
+                                <p>Drag & drop or click to upload</p>
+                                <p class="small">PDF, JPG, PNG - Max 5MB</p>
+                                <input type="file" id="proofResDoc" name="proofResDoc" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                            </div>
+                            <div class="uploaded-file hidden" id="proofResDocUploaded">
+                                <i data-lucide="file-check"></i>
+                                <span class="file-name"></span>
+                                <button type="button" class="btn-remove" data-doc="proofResDoc"><i data-lucide="x"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Proof of Income (Optional) -->
+                        <div class="document-upload-card">
+                            <div class="doc-header">
+                                <i data-lucide="dollar-sign"></i>
+                                <h4>Proof of Income (for financial aid)</h4>
+                            </div>
+                            <div class="upload-zone" id="proofIncomeUploadZone">
+                                <i data-lucide="upload-cloud"></i>
+                                <p>Drag & drop or click to upload</p>
+                                <p class="small">PDF, JPG, PNG - Max 5MB</p>
+                                <input type="file" id="proofIncomeDoc" name="proofIncomeDoc" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                            </div>
+                            <div class="uploaded-file hidden" id="proofIncomeDocUploaded">
+                                <i data-lucide="file-check"></i>
+                                <span class="file-name"></span>
+                                <button type="button" class="btn-remove" data-doc="proofIncomeDoc"><i data-lucide="x"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="margin-top: 1.5rem;">
+                        <h4><i data-lucide="info"></i> Document Guidelines</h4>
+                        <ul>
+                            <li>All documents must be clear and legible</li>
+                            <li>Certified copies may be required upon acceptance</li>
+                            <li>File size limit: 5MB per document</li>
+                            <li>Supported formats: PDF, JPG, PNG</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Section 4: Personal Statement -->
+                <section class="form-section" id="section4">
+                    <div class="section-header">
+                        <h2>Personal Statement</h2>
+                        <p class="section-description">Tell us about yourself, your goals, and why you want to study at UWC.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="personalStatement">
+                                Your Personal Statement <span class="required">*</span>
+                                <button type="button" class="info-btn" data-tooltip="Write about your background, achievements, challenges overcome, and academic goals. Be authentic and specific.">
+                                    <i data-lucide="info"></i>
+                                </button>
+                            </label>
+                            <textarea
+                                id="personalStatement"
+                                name="personalStatement"
+                                rows="12"
+                                required
+                                placeholder="Tell us your story... What motivates you? What challenges have you overcome? What are your academic and career goals? Why UWC?"
+                                maxlength="2000"
+                            ></textarea>
+                            <div class="word-counter">
+                                <span id="charCount">0</span> / 2000 characters
+                                <span class="divider">|</span>
+                                <span id="wordCount">0</span> words
+                            </div>
+                            <span class="error-message" id="personalStatement-error"></span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="whyUWC">
+                                Why UWC? <span class="required">*</span>
+                            </label>
+                            <textarea
+                                id="whyUWC"
+                                name="whyUWC"
+                                rows="6"
+                                required
+                                placeholder="What attracted you to UWC specifically? What do you hope to gain from studying here?"
+                                maxlength="500"
+                            ></textarea>
+                            <div class="word-counter">
+                                <span id="whyUWCCharCount">0</span> / 500 characters
+                            </div>
+                            <span class="error-message" id="whyUWC-error"></span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="careerGoals">
+                                Career Aspirations <span class="required">*</span>
+                            </label>
+                            <textarea
+                                id="careerGoals"
+                                name="careerGoals"
+                                rows="6"
+                                required
+                                placeholder="What are your career goals? How will your chosen program help you achieve them?"
+                                maxlength="500"
+                            ></textarea>
+                            <div class="word-counter">
+                                <span id="careerGoalsCharCount">0</span> / 500 characters
+                            </div>
+                            <span class="error-message" id="careerGoals-error"></span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Extracurricular Activities -->
+                <section class="form-section" id="section5">
+                    <div class="section-header">
+                        <h2>Extracurricular Activities & Leadership</h2>
+                        <p class="section-description">Share your involvement in activities outside the classroom.</p>
+                    </div>
+
+                    <div class="activities-container">
+                        <div id="activitiesList"></div>
+                        <button type="button" class="btn-secondary" id="addActivity">
+                            <i data-lucide="plus"></i> Add Activity
+                        </button>
+                    </div>
+
+                    <div class="form-grid" style="margin-top: 2rem;">
+                        <div class="form-group full-width">
+                            <label for="volunteering">
+                                Community Service & Volunteering
+                            </label>
+                            <textarea
+                                id="volunteering"
+                                name="volunteering"
+                                rows="4"
+                                placeholder="Describe any community service or volunteer work you've done..."
+                            ></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="leadership">
+                                Leadership Experience
+                            </label>
+                            <textarea
+                                id="leadership"
+                                name="leadership"
+                                rows="4"
+                                placeholder="Describe any leadership roles you've held (e.g., prefect, team captain, club president)..."
+                            ></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6: Work Experience & Awards -->
+                <section class="form-section" id="section6">
+                    <div class="section-header">
+                        <h2>Work Experience & Achievements</h2>
+                        <p class="section-description">Tell us about your work experience, awards, and accomplishments.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <h3><i data-lucide="briefcase"></i> Work Experience</h3>
+                        <div class="work-experience-container">
+                            <div id="workExperienceList"></div>
+                            <button type="button" class="btn-secondary" id="addWorkExperience">
+                                <i data-lucide="plus"></i> Add Work Experience
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="subsection" style="margin-top: 2rem;">
+                        <h3><i data-lucide="award"></i> Awards & Achievements</h3>
+                        <div class="awards-container">
+                            <div id="awardsList"></div>
+                            <button type="button" class="btn-secondary" id="addAward">
+                                <i data-lucide="plus"></i> Add Award
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="info-box" style="margin-top: 1.5rem;">
+                        <p><strong>Tip:</strong> Include academic awards, sports achievements, art/music recognitions, or any other accomplishments you're proud of!</p>
+                    </div>
+                </section>
+
+                <!-- Section 7: References & Emergency Contact -->
+                <section class="form-section" id="section7">
+                    <div class="section-header">
+                        <h2>References & Emergency Contact</h2>
+                        <p class="section-description">Provide contact details for references and an emergency contact person.</p>
+                    </div>
+
+                    <div class="subsection">
+                        <h3><i data-lucide="users"></i> References</h3>
+                        <p class="small" style="margin-bottom: 1.5rem;">Provide at least 2 references (teachers, principals, counselors, or community leaders).</p>
+
+                        <div id="referencesList"></div>
+                        <button type="button" class="btn-secondary" id="addReference">
+                            <i data-lucide="plus"></i> Add Reference
+                        </button>
+                    </div>
+
+                    <div class="subsection" style="margin-top: 2rem;">
+                        <h3><i data-lucide="phone-call"></i> Emergency Contact</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="emergencyName">
+                                    Full Name <span class="required">*</span>
+                                </label>
+                                <input type="text" id="emergencyName" name="emergencyName" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="emergencyRelationship">
+                                    Relationship <span class="required">*</span>
+                                </label>
+                                <select id="emergencyRelationship" name="emergencyRelationship" required>
+                                    <option value="">Select relationship</option>
+                                    <option value="parent">Parent</option>
+                                    <option value="guardian">Legal Guardian</option>
+                                    <option value="sibling">Sibling</option>
+                                    <option value="relative">Other Relative</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="emergencyPhone">
+                                    Phone Number <span class="required">*</span>
+                                </label>
+                                <input type="tel" id="emergencyPhone" name="emergencyPhone" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="emergencyEmail">
+                                    Email Address
+                                </label>
+                                <input type="email" id="emergencyEmail" name="emergencyEmail">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 8: Residence Application -->
+                <section class="form-section" id="section8">
                     <div class="section-header">
                         <h2>Residence Application</h2>
                         <p class="section-description">Apply for on-campus accommodation if needed.</p>
@@ -346,8 +696,8 @@
                     </div>
                 </section>
 
-                <!-- Section 4: Financial Aid -->
-                <section class="form-section" id="section4">
+                <!-- Section 9: Financial Aid -->
+                <section class="form-section" id="section9">
                     <div class="section-header">
                         <h2>Financial Aid Application</h2>
                         <p class="section-description">Apply for financial assistance, bursaries, and scholarships.</p>
@@ -413,8 +763,8 @@
                     </div>
                 </section>
 
-                <!-- Section 5: Review & Submit -->
-                <section class="form-section" id="section5">
+                <!-- Section 10: Review & Submit -->
+                <section class="form-section" id="section10">
                     <div class="section-header">
                         <h2>Review Your Application</h2>
                         <p class="section-description">Please review all information before submitting.</p>

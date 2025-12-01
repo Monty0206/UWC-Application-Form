@@ -1750,6 +1750,539 @@ body.low-data-mode .floating-particles {
     }
 }
 
+/* ========================================
+   Quick Tools Grid Styles
+   ======================================== */
+
+.quick-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.tool-card {
+    background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--gray);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+    border-color: var(--uwc-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 47, 101, 0.15);
+    background: linear-gradient(135deg, var(--white) 0%, #FFF8E1 100%);
+}
+
+.tool-card i {
+    width: 48px;
+    height: 48px;
+    color: var(--uwc-blue);
+    margin-bottom: 1rem;
+}
+
+.tool-card h3 {
+    color: var(--uwc-blue);
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.tool-card p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+/* ========================================
+   Profile Picture Upload Styles
+   ======================================== */
+
+.profile-picture-section {
+    background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
+
+.profile-pic-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--uwc-blue);
+}
+
+.profile-pic-upload {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.profile-pic-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--uwc-gold);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--light-gray) 0%, var(--gray) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.profile-pic-preview:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 47, 101, 0.2);
+}
+
+.profile-pic-preview .placeholder-icon {
+    width: 60px;
+    height: 60px;
+    color: var(--uwc-blue);
+    opacity: 0.4;
+}
+
+.profile-pic-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-pic-controls {
+    flex: 1;
+    min-width: 200px;
+}
+
+.profile-pic-controls p.small {
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* ========================================
+   Document Upload Styles
+   ======================================== */
+
+.documents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.document-upload-card {
+    background: var(--white);
+    border: 2px solid var(--gray);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.document-upload-card:hover {
+    border-color: var(--uwc-gold);
+    box-shadow: 0 4px 12px rgba(0, 47, 101, 0.1);
+}
+
+.doc-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.doc-header i {
+    width: 24px;
+    height: 24px;
+    color: var(--uwc-blue);
+}
+
+.doc-header h4 {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.upload-zone {
+    border: 2px dashed var(--gray);
+    border-radius: var(--border-radius);
+    padding: 2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--light-gray);
+}
+
+.upload-zone:hover {
+    border-color: var(--uwc-blue);
+    background: var(--white);
+}
+
+.upload-zone.drag-over {
+    border-color: var(--uwc-gold);
+    background: rgba(245, 197, 66, 0.1);
+    transform: scale(1.02);
+}
+
+.upload-zone.uploading {
+    border-color: var(--uwc-blue);
+    background: rgba(0, 47, 101, 0.05);
+    animation: uploadPulse 1s infinite;
+}
+
+@keyframes uploadPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.upload-zone i {
+    width: 48px;
+    height: 48px;
+    color: var(--uwc-blue);
+    margin-bottom: 0.5rem;
+}
+
+.upload-zone p {
+    margin: 0.25rem 0;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.upload-zone p.small {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.uploaded-file {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--success);
+}
+
+.uploaded-file i {
+    width: 24px;
+    height: 24px;
+    color: var(--success);
+    flex-shrink: 0;
+}
+
+.uploaded-file .file-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.btn-remove:hover {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+.btn-remove i {
+    width: 20px;
+    height: 20px;
+    color: var(--error);
+}
+
+/* ========================================
+   Word Counter Styles
+   ======================================== */
+
+.word-counter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.word-counter .divider {
+    color: var(--gray);
+}
+
+.word-counter span:first-child {
+    color: var(--uwc-blue);
+    font-weight: 600;
+}
+
+/* ========================================
+   Dynamic Card Styles
+   ======================================== */
+
+.dynamic-card {
+    background: var(--white);
+    border: 2px solid var(--gray);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    animation: slideInCard 0.3s ease;
+}
+
+@keyframes slideInCard {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dynamic-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--gray);
+}
+
+.dynamic-card-header h4 {
+    margin: 0;
+    color: var(--uwc-blue);
+    font-size: 1.1rem;
+}
+
+.btn-remove-dynamic {
+    background: none;
+    border: 2px solid var(--error);
+    color: var(--error);
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-dynamic:hover {
+    background: var(--error);
+    color: var(--white);
+    transform: rotate(90deg);
+}
+
+.btn-remove-dynamic i {
+    width: 20px;
+    height: 20px;
+}
+
+.activities-container,
+.work-experience-container,
+.awards-container {
+    margin-bottom: 1.5rem;
+}
+
+/* ========================================
+   Enhanced Step Indicators for 10 Steps
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .step-indicators {
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--uwc-gold) var(--gray);
+    }
+
+    .step-indicators::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .step-indicators::-webkit-scrollbar-track {
+        background: var(--gray);
+        border-radius: 3px;
+    }
+
+    .step-indicators::-webkit-scrollbar-thumb {
+        background: var(--uwc-gold);
+        border-radius: 3px;
+    }
+
+    .step {
+        flex-shrink: 0;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .step {
+        min-width: 70px;
+    }
+
+    .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 0.875rem;
+    }
+
+    .step-label {
+        font-size: 0.65rem;
+    }
+
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-pic-upload {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-pic-controls {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .step {
+        min-width: 60px;
+    }
+
+    .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+
+    .step-label {
+        font-size: 0.6rem;
+    }
+}
+
+/* ========================================
+   Loading Animations
+   ======================================== */
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 47, 101, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.loading-spinner {
+    width: 80px;
+    height: 80px;
+    border: 6px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--uwc-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    color: var(--white);
+    margin-top: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   Tooltip Enhancements
+   ======================================== */
+
+.info-btn[data-tooltip] {
+    position: relative;
+}
+
+.info-btn[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    bottom: 125%;
+    transform: translateX(-50%);
+    padding: 0.75rem 1rem;
+    background: var(--text-primary);
+    color: var(--white);
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    white-space: normal;
+    width: max-content;
+    max-width: 300px;
+    z-index: 1000;
+    animation: tooltipFadeIn 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.info-btn[data-tooltip]:hover::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 115%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--text-primary);
+    z-index: 1000;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
 /* Print Styles */
 @media print {
     .app-header,

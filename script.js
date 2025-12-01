@@ -5,11 +5,17 @@
 // State Management
 const appState = {
     currentSection: 1,
-    totalSections: 5,
+    totalSections: 10,
     formData: {},
     emailVerified: false,
     phoneVerified: false,
-    lowDataMode: false
+    lowDataMode: false,
+    profilePicture: null,
+    uploadedDocuments: {},
+    activities: [],
+    workExperience: [],
+    awards: [],
+    references: []
 };
 
 // Sample ranking data (in real app, this would come from server)
@@ -112,6 +118,45 @@ function setupEventListeners() {
             });
         }
     });
+
+    // Profile picture upload
+    const uploadProfilePicBtn = document.getElementById('uploadProfilePic');
+    const profilePicInput = document.getElementById('profilePic');
+    const removeProfilePicBtn = document.getElementById('removeProfilePic');
+
+    if (uploadProfilePicBtn) {
+        uploadProfilePicBtn.addEventListener('click', () => profilePicInput.click());
+    }
+    if (profilePicInput) {
+        profilePicInput.addEventListener('change', handleProfilePicUpload);
+    }
+    if (removeProfilePicBtn) {
+        removeProfilePicBtn.addEventListener('click', removeProfilePic);
+    }
+
+    // Document uploads
+    setupDocumentUpload('idDoc');
+    setupDocumentUpload('matricDoc');
+    setupDocumentUpload('proofResDoc');
+    setupDocumentUpload('proofIncomeDoc');
+
+    // Word counters for textareas
+    setupWordCounter('personalStatement', 'charCount', 'wordCount');
+    setupWordCounter('whyUWC', 'whyUWCCharCount');
+    setupWordCounter('careerGoals', 'careerGoalsCharCount');
+
+    // Dynamic sections
+    const addActivityBtn = document.getElementById('addActivity');
+    if (addActivityBtn) addActivityBtn.addEventListener('click', addActivity);
+
+    const addWorkBtn = document.getElementById('addWorkExperience');
+    if (addWorkBtn) addWorkBtn.addEventListener('click', addWorkExperience);
+
+    const addAwardBtn = document.getElementById('addAward');
+    if (addAwardBtn) addAwardBtn.addEventListener('click', addAward);
+
+    const addRefBtn = document.getElementById('addReference');
+    if (addRefBtn) addRefBtn.addEventListener('click', addReference);
 }
 
 // Section Navigation
@@ -727,6 +772,403 @@ function showAutosaveIndicator() {
     }, 2000);
 }
 
+// ========================================
+// Profile Picture Functions
+// ========================================
+
+function handleProfilePicUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Validate file
+    if (!file.type.match('image/(jpeg|jpg|png)')) {
+        showNotification('Please upload a JPG or PNG image', 'error');
+        return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+        showNotification('Image size must be less than 2MB', 'error');
+        return;
+    }
+
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const preview = document.getElementById('profilePicImage');
+        const placeholder = document.querySelector('.placeholder-icon');
+
+        preview.src = e.target.result;
+        preview.classList.remove('hidden');
+        if (placeholder) placeholder.style.display = 'none';
+
+        document.getElementById('removeProfilePic').classList.remove('hidden');
+
+        appState.profilePicture = e.target.result;
+        showNotification('Profile picture uploaded successfully', 'success');
+        saveFormData();
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeProfilePic() {
+    const preview = document.getElementById('profilePicImage');
+    const placeholder = document.querySelector('.placeholder-icon');
+    const input = document.getElementById('profilePic');
+
+    preview.src = '';
+    preview.classList.add('hidden');
+    if (placeholder) placeholder.style.display = 'block';
+
+    document.getElementById('removeProfilePic').classList.add('hidden');
+    input.value = '';
+    appState.profilePicture = null;
+
+    showNotification('Profile picture removed', 'info');
+    saveFormData();
+}
+
+// ========================================
+// Document Upload Functions
+// ========================================
+
+function setupDocumentUpload(docId) {
+    const uploadZone = document.getElementById(`${docId}UploadZone`);
+    const fileInput = document.getElementById(docId);
+    const removeBtn = document.querySelector(`[data-doc="${docId}"]`);
+
+    if (!uploadZone || !fileInput) return;
+
+    // Click to upload
+    uploadZone.addEventListener('click', () => fileInput.click());
+
+    // Drag and drop
+    uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('drag-over');
+    });
+
+    uploadZone.addEventListener('dragleave', () => {
+        uploadZone.classList.remove('drag-over');
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+            handleDocumentUpload(docId, file);
+        }
+    });
+
+    // File input change
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) handleDocumentUpload(docId, file);
+    });
+
+    // Remove button
+    if (removeBtn) {
+        removeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            removeDocument(docId);
+        });
+    }
+}
+
+function handleDocumentUpload(docId, file) {
+    // Validate file
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+    if (!allowedTypes.includes(file.type)) {
+        showNotification('Please upload PDF, JPG, or PNG files only', 'error');
+        return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+        showNotification('File size must be less than 5MB', 'error');
+        return;
+    }
+
+    // Show upload progress (simulated)
+    const uploadZone = document.getElementById(`${docId}UploadZone`);
+    const uploadedDiv = document.getElementById(`${docId}Uploaded`);
+
+    uploadZone.classList.add('uploading');
+
+    setTimeout(() => {
+        uploadZone.classList.remove('uploading');
+        uploadZone.classList.add('hidden');
+        uploadedDiv.classList.remove('hidden');
+        uploadedDiv.querySelector('.file-name').textContent = file.name;
+
+        appState.uploadedDocuments[docId] = {
+            name: file.name,
+            size: file.size,
+            type: file.type
+        };
+
+        showNotification(`${file.name} uploaded successfully`, 'success');
+        saveFormData();
+
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }, 1000);
+}
+
+function removeDocument(docId) {
+    const uploadZone = document.getElementById(`${docId}UploadZone`);
+    const uploadedDiv = document.getElementById(`${docId}Uploaded`);
+    const fileInput = document.getElementById(docId);
+
+    uploadZone.classList.remove('hidden');
+    uploadedDiv.classList.add('hidden');
+    fileInput.value = '';
+
+    delete appState.uploadedDocuments[docId];
+    showNotification('Document removed', 'info');
+    saveFormData();
+}
+
+// ========================================
+// Word Counter Functions
+// ========================================
+
+function setupWordCounter(textareaId, charCountId, wordCountId = null) {
+    const textarea = document.getElementById(textareaId);
+    const charCounter = document.getElementById(charCountId);
+
+    if (!textarea || !charCounter) return;
+
+    textarea.addEventListener('input', () => {
+        const text = textarea.value;
+        const charCount = text.length;
+        charCounter.textContent = charCount;
+
+        if (wordCountId) {
+            const wordCounter = document.getElementById(wordCountId);
+            const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+            if (wordCounter) wordCounter.textContent = words.length;
+        }
+    });
+}
+
+// ========================================
+// Dynamic Activities Functions
+// ========================================
+
+function addActivity() {
+    const container = document.getElementById('activitiesList');
+    const index = appState.activities.length;
+
+    const activityCard = document.createElement('div');
+    activityCard.className = 'dynamic-card';
+    activityCard.innerHTML = `
+        <div class="dynamic-card-header">
+            <h4>Activity ${index + 1}</h4>
+            <button type="button" class="btn-remove-dynamic" onclick="removeActivity(${index})">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Activity Name <span class="required">*</span></label>
+                <input type="text" name="activity_name_${index}" placeholder="e.g., Soccer Team, Debate Club" required>
+            </div>
+            <div class="form-group">
+                <label>Role/Position</label>
+                <input type="text" name="activity_role_${index}" placeholder="e.g., Team Captain, Member">
+            </div>
+            <div class="form-group">
+                <label>Duration</label>
+                <input type="text" name="activity_duration_${index}" placeholder="e.g., 2020-2023">
+            </div>
+            <div class="form-group full-width">
+                <label>Description</label>
+                <textarea name="activity_desc_${index}" rows="2" placeholder="Briefly describe your involvement and achievements..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(activityCard);
+    appState.activities.push({ index });
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function removeActivity(index) {
+    const cards = document.querySelectorAll('#activitiesList .dynamic-card');
+    if (cards[index]) {
+        cards[index].remove();
+        appState.activities.splice(index, 1);
+        showNotification('Activity removed', 'info');
+    }
+}
+
+// ========================================
+// Work Experience Functions
+// ========================================
+
+function addWorkExperience() {
+    const container = document.getElementById('workExperienceList');
+    const index = appState.workExperience.length;
+
+    const workCard = document.createElement('div');
+    workCard.className = 'dynamic-card';
+    workCard.innerHTML = `
+        <div class="dynamic-card-header">
+            <h4>Work Experience ${index + 1}</h4>
+            <button type="button" class="btn-remove-dynamic" onclick="removeWorkExperience(${index})">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Company/Organization</label>
+                <input type="text" name="work_company_${index}" placeholder="Company name">
+            </div>
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" name="work_title_${index}" placeholder="Your position">
+            </div>
+            <div class="form-group">
+                <label>Duration</label>
+                <input type="text" name="work_duration_${index}" placeholder="e.g., Jan 2022 - Dec 2023">
+            </div>
+            <div class="form-group full-width">
+                <label>Responsibilities & Achievements</label>
+                <textarea name="work_desc_${index}" rows="3" placeholder="Describe your role and key achievements..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(workCard);
+    appState.workExperience.push({ index });
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function removeWorkExperience(index) {
+    const cards = document.querySelectorAll('#workExperienceList .dynamic-card');
+    if (cards[index]) {
+        cards[index].remove();
+        appState.workExperience.splice(index, 1);
+        showNotification('Work experience removed', 'info');
+    }
+}
+
+// ========================================
+// Awards Functions
+// ========================================
+
+function addAward() {
+    const container = document.getElementById('awardsList');
+    const index = appState.awards.length;
+
+    const awardCard = document.createElement('div');
+    awardCard.className = 'dynamic-card';
+    awardCard.innerHTML = `
+        <div class="dynamic-card-header">
+            <h4>Award ${index + 1}</h4>
+            <button type="button" class="btn-remove-dynamic" onclick="removeAward(${index})">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Award Name</label>
+                <input type="text" name="award_name_${index}" placeholder="e.g., Honor Roll, Sports Achievement">
+            </div>
+            <div class="form-group">
+                <label>Awarded By</label>
+                <input type="text" name="award_org_${index}" placeholder="Organization or institution">
+            </div>
+            <div class="form-group">
+                <label>Year</label>
+                <input type="text" name="award_year_${index}" placeholder="e.g., 2023">
+            </div>
+            <div class="form-group full-width">
+                <label>Description</label>
+                <textarea name="award_desc_${index}" rows="2" placeholder="Briefly describe the award and why you received it..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(awardCard);
+    appState.awards.push({ index });
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function removeAward(index) {
+    const cards = document.querySelectorAll('#awardsList .dynamic-card');
+    if (cards[index]) {
+        cards[index].remove();
+        appState.awards.splice(index, 1);
+        showNotification('Award removed', 'info');
+    }
+}
+
+// ========================================
+// References Functions
+// ========================================
+
+function addReference() {
+    const container = document.getElementById('referencesList');
+    const index = appState.references.length;
+
+    const refCard = document.createElement('div');
+    refCard.className = 'dynamic-card';
+    refCard.innerHTML = `
+        <div class="dynamic-card-header">
+            <h4>Reference ${index + 1}</h4>
+            <button type="button" class="btn-remove-dynamic" onclick="removeReference(${index})">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Full Name <span class="required">*</span></label>
+                <input type="text" name="ref_name_${index}" placeholder="Reference's full name" required>
+            </div>
+            <div class="form-group">
+                <label>Title/Position <span class="required">*</span></label>
+                <input type="text" name="ref_title_${index}" placeholder="e.g., Teacher, Principal" required>
+            </div>
+            <div class="form-group">
+                <label>Organization <span class="required">*</span></label>
+                <input type="text" name="ref_org_${index}" placeholder="School or institution name" required>
+            </div>
+            <div class="form-group">
+                <label>Email <span class="required">*</span></label>
+                <input type="email" name="ref_email_${index}" placeholder="reference@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>Phone Number <span class="required">*</span></label>
+                <input type="tel" name="ref_phone_${index}" placeholder="+27..." required>
+            </div>
+            <div class="form-group">
+                <label>Relationship</label>
+                <input type="text" name="ref_relationship_${index}" placeholder="e.g., Math Teacher for 3 years">
+            </div>
+        </div>
+    `;
+
+    container.appendChild(refCard);
+    appState.references.push({ index });
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function removeReference(index) {
+    const cards = document.querySelectorAll('#referencesList .dynamic-card');
+    if (cards[index]) {
+        cards[index].remove();
+        appState.references.splice(index, 1);
+        showNotification('Reference removed', 'info');
+    }
+}
+
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     // Ctrl/Cmd + S to save
@@ -756,4 +1198,4 @@ window.addEventListener('beforeunload', (e) => {
     }
 });
 
-console.log('🎓 UWC Application Portal loaded successfully');
+console.log('🎓 UWC Application Portal loaded successfully - Enhanced Version');
