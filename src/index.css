@@ -1,0 +1,516 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* UWC Design System - Bold & Interactive */
+
+@layer base {
+  :root {
+    /* UWC Brand Colors */
+    --uwc-blue: 214 100% 20%;
+    --uwc-dark-blue: 214 100% 13%;
+    --uwc-gold: 43 91% 61%;
+    --uwc-light-gold: 43 100% 70%;
+    
+    /* Core Theme */
+    --background: 210 20% 98%;
+    --foreground: 214 100% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 214 100% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 100% 13%;
+
+    --primary: 214 100% 20%;
+    --primary-foreground: 43 91% 61%;
+
+    --secondary: 43 91% 61%;
+    --secondary-foreground: 214 100% 13%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 214 30% 40%;
+
+    --accent: 43 91% 61%;
+    --accent-foreground: 214 100% 13%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 63% 42%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 214 30% 85%;
+    --input: 214 30% 90%;
+    --ring: 43 91% 61%;
+
+    --radius: 0.75rem;
+
+    /* Custom UWC tokens */
+    --gradient-hero: linear-gradient(135deg, hsl(214 100% 20%) 0%, hsl(214 100% 13%) 50%, hsl(214 100% 8%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(43 91% 61%) 0%, hsl(43 100% 70%) 100%);
+    --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
+    --gradient-glow: radial-gradient(circle, hsl(43 91% 61% / 0.3) 0%, transparent 70%);
+    
+    --shadow-sm: 0 2px 8px hsl(214 100% 13% / 0.08);
+    --shadow-md: 0 8px 24px hsl(214 100% 13% / 0.12);
+    --shadow-lg: 0 16px 48px hsl(214 100% 13% / 0.16);
+    --shadow-glow: 0 0 40px hsl(43 91% 61% / 0.4);
+    --shadow-gold: 0 4px 20px hsl(43 91% 61% / 0.3);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 214 100% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 214 100% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 214 100% 13%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 43 91% 61%;
+    --primary-foreground: 214 100% 13%;
+
+    --secondary: 214 100% 20%;
+    --secondary-foreground: 43 91% 61%;
+
+    --muted: 214 50% 20%;
+    --muted-foreground: 210 20% 70%;
+
+    --accent: 43 91% 61%;
+    --accent-foreground: 214 100% 13%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 50% 25%;
+    --input: 214 50% 20%;
+    --ring: 43 91% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', Georgia, serif;
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-primary/80 backdrop-blur-xl border border-white/10;
+  }
+
+  /* Gold glow effect */
+  .glow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+
+  .glow-gold-intense {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Gradient text */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  /* Pulse glow */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  /* Shimmer effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  /* Particle effect container */
+  .particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* Success checkmark animation */
+  .success-check {
+    animation: successCheck 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+
+  /* Bounce in animation */
+  .bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* Slide up animation */
+  .slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  /* Fade slide animation */
+  .fade-slide-in {
+    animation: fadeSlideIn 0.6s ease-out forwards;
+  }
+
+  /* Scale animation */
+  .scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  /* Wiggle animation for attention */
+  .wiggle {
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  /* Progress ring animation */
+  .progress-ring-animate {
+    animation: progressRing 1s ease-out forwards;
+  }
+
+  /* Confetti container */
+  .confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(43 91% 61% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(43 91% 61% / 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes successCheck {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(-45deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes progressRing {
+  0% {
+    stroke-dashoffset: 283;
+  }
+}
+
+@keyframes particle {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    border-color: transparent;
+  }
+  51%, 100% {
+    border-color: hsl(43 91% 61%);
+  }
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 2s steps(40) forwards;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple-effect::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: hsl(43 91% 61% / 0.3);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes tada {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+  10%, 20% {
+    transform: scale(0.9) rotate(-3deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale(1.1) rotate(3deg);
+  }
+  40%, 60%, 80% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+.animate-tada {
+  animation: tada 1s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/30 rounded-full;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary/50;
+}
+
+/* Focus styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
+}
+
+/* Form input focus animation */
+input:focus, textarea:focus, select:focus {
+  @apply border-accent;
+  box-shadow: 0 0 0 3px hsl(43 91% 61% / 0.2);
+}
+
+/* Button hover lift */
+.btn-lift {
+  transition: all 0.2s ease;
+}
+
+.btn-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-lift:active {
+  transform: translateY(0);
+}
