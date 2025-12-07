@@ -1,20 +1,20 @@
-﻿# UWC Application Portal - Improved Prototype
+# UWC Application Portal - Improved Prototype
 
-## ≡ƒôï Project Overview
+## 📋 Project Overview
 
 This is an improved application portal for the University of the Western Cape (UWC), designed to address the high abandonment rate (210,000 out of 430,000 applications) and create a more inclusive, accessible experience for all students, especially those from less fortunate backgrounds.
 
-## ≡ƒÄ» Key Problems Solved
+## 🎯 Key Problems Solved
 
 ### Current UWC Issues Addressed:
-- Γ¥î **Fragmented Systems** ΓåÆ Γ£à **Unified Portal** (everything in one place)
-- Γ¥î **High Abandonment Rate** ΓåÆ Γ£à **Save & Resume** (never lose progress)
-- Γ¥î **No Transparency** ΓåÆ Γ£à **Real-time Ranking Dashboard**
-- Γ¥î **Email-only Communication** ΓåÆ Γ£à **SMS/WhatsApp Integration**
-- Γ¥î **High Data Costs** ΓåÆ Γ£à **Low-data Mode**
-- Γ¥î **Confusing Process** ΓåÆ Γ£à **Progress Tracking & Guided Steps**
+- ❌ **Fragmented Systems** → ✅ **Unified Portal** (everything in one place)
+- ❌ **High Abandonment Rate** → ✅ **Save & Resume** (never lose progress)
+- ❌ **No Transparency** → ✅ **Real-time Ranking Dashboard**
+- ❌ **Email-only Communication** → ✅ **SMS/WhatsApp Integration**
+- ❌ **High Data Costs** → ✅ **Low-data Mode**
+- ❌ **Confusing Process** → ✅ **Progress Tracking & Guided Steps**
 
-## ≡ƒîƒ Features Implemented
+## 🌟 Features Implemented
 
 ### 1. **Unified Application Portal**
 Inspired by: Common App & Coalition App
@@ -107,7 +107,7 @@ NEW: Dedicated APS (Admission Point Score) calculator
 ### 12. **Application Status Tracker**
 NEW: Real-time application monitoring system
 - Beautiful timeline visualization
-- 5-stage tracking (Received ΓåÆ Verified ΓåÆ Review ΓåÆ Decision ΓåÆ Registration)
+- 5-stage tracking (Received → Verified → Review → Decision → Registration)
 - Documents checklist with status indicators
 - Next steps guide
 - Animated progress indicators
@@ -139,7 +139,7 @@ NEW: Integrated tools for better user experience
 - Form validation for required fields
 - Auto-save all dynamic content
 
-## ≡ƒÄ¿ Design System
+## 🎨 Design System
 
 ### Color Palette
 - **Primary Blue:** #003B5C (UWC Official)
@@ -161,7 +161,7 @@ NEW: Integrated tools for better user experience
 - Smooth transitions for all interactions
 - Accessible focus states (3px gold outline)
 
-## ≡ƒôè Best Practices Incorporated
+## 📊 Best Practices Incorporated
 
 ### From Top Universities:
 1. **MIT** - Clear, straightforward questions with purpose
@@ -184,7 +184,7 @@ NEW: Integrated tools for better user experience
 4. **Conditional logic** - Only show relevant fields
 5. **Help tooltips** - Context-sensitive assistance
 
-## ≡ƒÜÇ How to Use
+## 🚀 How to Use
 
 ### For Students:
 1. Open `index.html` in any modern web browser
@@ -218,7 +218,7 @@ NEW: Integrated tools for better user experience
 - Use SA phone format: +27xxxxxxxxx or 0xxxxxxxxx
 - Use 13-digit SA ID number
 
-## ≡ƒô▒ Responsive Design
+## 📱 Responsive Design
 
 ### Mobile (< 480px)
 - Single column layout
@@ -236,7 +236,7 @@ NEW: Integrated tools for better user experience
 - Side-by-side navigation
 - Maximum efficiency
 
-## ΓÖ┐ Accessibility Features
+## ♿ Accessibility Features
 
 ### Keyboard Navigation
 - Tab through all form fields
@@ -265,7 +265,7 @@ NEW: Integrated tools for better user experience
 - Predictable navigation
 - Error prevention
 
-## ≡ƒôê Metrics to Track
+## 📈 Metrics to Track
 
 If this were implemented, track:
 1. **Completion Rate** - Target: > 75% (up from 51%)
@@ -276,7 +276,7 @@ If this were implemented, track:
 6. **Help Requests** - What confuses users
 7. **Verification Success** - Email/SMS verification rates
 
-## ≡ƒöÉ Security & Privacy
+## 🔐 Security & Privacy
 
 ### Data Protection
 - POPIA compliant
@@ -292,7 +292,7 @@ If this were implemented, track:
 - Opt-in communications
 - Right to deletion
 
-## ≡ƒÜº Future Enhancements
+## 🚧 Future Enhancements
 
 ### Phase 2:
 - [ ] Document upload with drag-and-drop
@@ -310,7 +310,7 @@ If this were implemented, track:
 - [ ] Peer mentor connections
 - [ ] Pre-application readiness checker
 
-## ≡ƒôÜ Technologies Used
+## 📚 Technologies Used
 
 - **HTML5** - Semantic structure
 - **CSS3** - Modern styling, Grid, Flexbox
@@ -318,7 +318,7 @@ If this were implemented, track:
 - **LocalStorage API** - Save progress
 - **Google Fonts** - Inter font family
 
-## ≡ƒîÉ Browser Support
+## 🌐 Browser Support
 
 - Chrome 90+
 - Firefox 88+
@@ -327,21 +327,21 @@ If this were implemented, track:
 - Mobile Safari (iOS 14+)
 - Chrome Mobile (Android 10+)
 
-## ≡ƒô₧ Support
+## 📞 Support
 
 For questions about this prototype:
 - Email: admissions@uwc.ac.za
 - Phone: +27 21 959 2911
 - Website: https://www.uwc.ac.za
 
-## ≡ƒô¥ License
+## 📝 License
 
 This prototype is created for the UWC Digital Transformation project.
-┬⌐ 2025 University of the Western Cape
+© 2025 University of the Western Cape
 
 ---
 
-## ≡ƒÄô Research Sources
+## 🎓 Research Sources
 
 This prototype was designed based on research from:
 
@@ -366,7 +366,7 @@ This prototype was designed based on research from:
 
 ---
 
-## ≡ƒÅå Key Improvements Over Current System
+## 🏆 Key Improvements Over Current System
 
 | Feature | Current UWC | This Prototype | Impact |
 |---------|-------------|----------------|--------|
