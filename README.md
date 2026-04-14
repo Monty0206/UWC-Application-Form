@@ -362,7 +362,7 @@ This prototype was designed based on research from:
    - Nielsen Norman Group - Form Design
    - Google Material Design Guidelines
    - Progressive Web App Patterns
-   - Mobile-First Design Principles
+   - Mobile-First Design Principle
 
 ---
 
